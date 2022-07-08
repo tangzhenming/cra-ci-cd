@@ -1,15 +1,17 @@
 version: "3"
 services:
   domain:
+    # image: containous/whoami
     build:
       context: .
       dockerfile: Dockerfile
-    # image: containous/whoami
     labels:
-       # curl -H Host:tang.local http://127.0.0.1
+      # curl -H Host:tang.local http://127.0.0.1
       #  - "traefik.http.routers.cra.rule=Host(`tang.local`)"
-       - "traefik.http.routers.cra.rule=Host(`1.116.142.210`)"
+      - "traefik.http.routers.cra.rule=Host(`1.116.142.210`)"
+
 networks:
   default:
     external:
-      name: cra-ci-cd_default
+      name: traefik_default 
+      # name: cra-ci-cd_default
