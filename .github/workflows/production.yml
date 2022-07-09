@@ -5,11 +5,10 @@ on:
     branches: ["main"]
 
 jobs:
-  your_job_id:
-    # Job name is Deploy
+  Deploy:
     name: Deploy
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy cra
+      - name: Deploy
         run: docker compose up --build -d
