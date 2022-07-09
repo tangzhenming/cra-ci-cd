@@ -1,17 +1,13 @@
 version: "3"
 services:
-  domain:
-    # image: containous/whoami
+  cra:
     build:
       context: .
       dockerfile: Dockerfile
     labels:
-      # curl -H Host:tang.local http://127.0.0.1
-      #  - "traefik.http.routers.cra.rule=Host(`tang.local`)"
-      - "traefik.http.routers.cra.rule=Host(`1.116.142.210`)"
+      - "traefik.http.routers.cra.rule=Host(`1.116.142.210`)" # 和 https://github.com/tangzhenming/DevOps/tree/main/traefik/example 中的 whoami 一起挂载到traefik 中
 
 networks:
   default:
     external:
       name: traefik_default 
-      # name: cra-ci-cd_default
