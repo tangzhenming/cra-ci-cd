@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # 配置 node.js 环境，此时使用的是 node14
+      # 注意此处 node.js 版本，与 Docker 中版本一致，与 package.json 中 engines.node 版本一致
+      # 如果需要测试不同 node.js 环境下的表现，可使用 matrix
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      # 安装依赖
+      - name: Install Dependencies
+        run: npm install
+
+      # 在 cra 中，使用 npm run build 来模拟 ESLint
+      - name: ESLint
+        run: npm run build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install Dependencies
+        run: npm install
+      - name: Test
+        run: npm run test
