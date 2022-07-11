@@ -5,10 +5,9 @@ on:
     branches: ["main"]
 
 jobs:
-  Deploy:
-    name: Deploy
+  deploy cra:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy
+      - name: run docker compose
         run: docker compose up --build -d
