@@ -1,8 +1,8 @@
-name: Production
+name: production
 
 on:
   push:
-    branches: ["main"]
+    branches: ["production"]
 
 jobs:
   deploy_cra: # job's ID
