@@ -5,9 +5,12 @@ on:
     branches: ["main"]
 
 jobs:
-  deploy_cra:
+  deploy_cra: # job's ID
     runs-on: self-hosted
+    environments: # 在 github 仓库记录每个环境的标志已经对应环境的 url
+      name: cra
+      url: http://1.116.142.210:8888/
     steps:
       - uses: actions/checkout@v3
-      - name: run docker compose
+      - name: Run docker compose
         run: docker compose up --build -d
