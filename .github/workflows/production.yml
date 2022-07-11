@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
-  deploy cra:
+  deploy_cra:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
