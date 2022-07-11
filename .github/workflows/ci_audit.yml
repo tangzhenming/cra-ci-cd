@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm i --package-lock-only
   audit:
     runs-on: ubuntu-latest
     needs: install
