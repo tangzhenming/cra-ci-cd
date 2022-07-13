@@ -44,7 +44,7 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - name: Config and run snyk
-        run: npx snyk auth $API_TOKEN && npx snyk test
+        run: npx snyk auth && npx snyk test
   lint:
     runs-on: ubuntu-latest
     needs: install
