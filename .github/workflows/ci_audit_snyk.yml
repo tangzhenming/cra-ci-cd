@@ -45,10 +45,16 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - run: echo $GITHUB_REF_NAME # 顺便完成下作业：获取分支名
-      - name: Config snyk
-        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
-      - name: Run snyk
-        run: npx snyk test
+      # - name: Config snyk
+      #   run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
+      # - name: Run snyk
+      #   run: npx snyk test
+      # 一样会退出，因为还是以命令行工具的方式在运行
+      # 使用官方的 actions
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     needs: install
