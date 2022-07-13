@@ -41,6 +41,8 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
     needs: install
+    environment:
+      name: cra
     steps: 
       - uses: actions/checkout@v3
       - name: Config snyk
