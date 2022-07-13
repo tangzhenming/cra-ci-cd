@@ -41,14 +41,13 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
     needs: install
-    environment:
-      name: cra
+    environment: cra
     steps: 
       - uses: actions/checkout@v3
-      - name: Config snyk
-        run: npx snyk auth $SNYK_TOKEN
+      # - name: Config snyk
+      #   run: npx snyk auth $SNYK_TOKEN
       - name: Run snyk
-        run: snyk test
+        run: npx snyk test
   lint:
     runs-on: ubuntu-latest
     needs: install
