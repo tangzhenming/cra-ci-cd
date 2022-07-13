@@ -44,8 +44,8 @@ jobs:
     environment: cra
     steps: 
       - uses: actions/checkout@v3
-      # - name: Config snyk
-      #   run: npx snyk auth $SNYK_TOKEN
+      - name: Config snyk
+        run: npx snyk auth
       - name: Run snyk
         run: npx snyk test
   lint:
