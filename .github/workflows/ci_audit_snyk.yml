@@ -29,15 +29,15 @@ jobs:
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
-  # audit:
-  #   runs-on: ubuntu-latest
-  #   needs: install
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Audit
-  #       run: npm audit
-  # audit 和 cicd 不太好配合，依赖检测结束后是以 Error: Process completed with exit code 1. 的方式退出的
-  # 使用 snyk 替代
+  audit:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v3
+      - name: Audit
+        run: npm audit && npm audit fix
+        ontinue-on-error: true
+  # 因为是以命令行工具的方式在运行，而这个命令行工具，包括下面的 snyk 也是一样的，只要发现依赖存在漏洞就会中断 workflow 的执行；使用 continue-on-error 来阻止这个行为
   snyk:
     runs-on: ubuntu-latest
     needs: install
@@ -45,17 +45,18 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - run: echo $GITHUB_REF_NAME # 顺便完成下作业：获取分支名
-      # - name: Config snyk
-      #   run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
-      # - name: Run snyk
-      #   run: npx snyk test
-      # 一样会退出，因为还是以命令行工具的方式在运行，而这个命令行工具，包括上面的 audit ，只要发现依赖存在漏洞就会中断 workflow 的执行；使用 continue-on-error 来阻止这个行为
+      - name: Config snyk
+        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
+      - name: Run snyk
+          run: npx snyk test
+          continue-on-error: true 
       # 使用官方的 actions
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # - uses: actions/checkout@v3
+      # - name: Run Snyk to check for vulnerabilities
+      #   uses: snyk/actions/node@master
+      #   continue-on-error: true
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     needs: install
