@@ -40,10 +40,10 @@ jobs:
   # 使用 snyk 替代
   snyk:
     runs-on: ubuntu-latest
-    # needs: install
+    needs: install
     environment: cra
     steps: 
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run: echo $GITHUB_REF_NAME # 顺便完成下作业：获取分支名
       - name: Config snyk
         run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
