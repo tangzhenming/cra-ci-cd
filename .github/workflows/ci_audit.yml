@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Audit
-        run: npm audit fix
+        run: npm audit fix --force
   lint:
     runs-on: ubuntu-latest
     needs: install
