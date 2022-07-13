@@ -29,13 +29,22 @@ jobs:
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
-  audit:
+  # audit:
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Audit
+  #       run: npm audit
+  # audit 和 cicd 不太好配合，依赖检测结束后是以 Error: Process completed with exit code 1. 的方式退出的
+  # 使用 snyk 替代
+  snyk:
     runs-on: ubuntu-latest
     needs: install
-    steps:
-      - uses: actions/checkout@v3
-      - name: Audit
-        run: npm audit fix --force
+    steps: 
+      - use: actions/checkout@v3
+      - name: snyk
+        run: npx snyk
   lint:
     runs-on: ubuntu-latest
     needs: install
