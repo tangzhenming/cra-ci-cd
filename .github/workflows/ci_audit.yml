@@ -39,7 +39,7 @@ jobs:
   # audit 和 cicd 不太好配合，依赖检测结束后是以 Error: Process completed with exit code 1. 的方式退出的
   # 使用 snyk 替代
   snyk:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: install
     environment: cra
     steps: 
