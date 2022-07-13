@@ -38,18 +38,18 @@ jobs:
         run: npm audit && npm audit fix
         ontinue-on-error: true
   # 因为是以命令行工具的方式在运行，而这个命令行工具，包括下面的 snyk 也是一样的，只要发现依赖存在漏洞就会中断 workflow 的执行；使用 continue-on-error 来阻止这个行为
-  snyk:
-    runs-on: ubuntu-latest
-    needs: install
-    environment: cra
-    steps: 
-      - uses: actions/checkout@v3
-      - run: echo $GITHUB_REF_NAME # 顺便完成下作业：获取分支名
-      - name: Config snyk
-        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
-      - name: Run snyk
-          run: npx snyk test
-          continue-on-error: true 
+  # snyk:
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   environment: cra
+  #   steps: 
+  #     - uses: actions/checkout@v3
+  #     - run: echo $GITHUB_REF_NAME # 顺便完成下作业：获取分支名
+  #     - name: Config snyk
+  #       run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
+  #     - name: Run snyk
+  #         run: npx snyk test
+  #         continue-on-error: true
       # 使用官方的 actions
       # - uses: actions/checkout@v3
       # - name: Run Snyk to check for vulnerabilities
