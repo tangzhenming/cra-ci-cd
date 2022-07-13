@@ -43,8 +43,8 @@ jobs:
     needs: install
     environment: cra
     steps: 
-      - run echo $GITHUB_BASE_REF # 顺便完成下作业：获取分支名
-      - run echo $SNYK_TOKEN
+      - run: echo $GITHUB_BASE_REF # 顺便完成下作业：获取分支名
+      - run: echo $SNYK_TOKEN
       # - uses: actions/checkout@v3
       # - name: Config snyk
       #   run: npx snyk auth $SNYK_TOKEN
