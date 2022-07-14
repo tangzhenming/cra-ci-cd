@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     labels:
-      - "traefik.http.routers.cra.rule=Host(`1.116.142.210`)" # 和 https://github.com/tangzhenming/DevOps/tree/main/traefik/example 中的 whoami 一起挂载到traefik 中
+      - "traefik.http.routers.cra.rule=Host(`cra.tangzhenming.com`)"
 
 networks:
   default:
